@@ -6,7 +6,7 @@ from predictor import predict_message_mood
 from predictor import ThresholdError
 
 
-class TestUser(unittest.TestCase):
+class TestPredictor(unittest.TestCase):
     def setUp(self):
         self.model = Model()
 
