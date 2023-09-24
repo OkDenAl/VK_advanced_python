@@ -1,7 +1,13 @@
 import time
 
 
+class InvalidParamError(Exception):
+    pass
+
+
 def mean(k):
+    if k <= 0:
+        raise InvalidParamError("invalid k param value")
     counter = 0
     buffer = [0] * k
     mean_val = 0
