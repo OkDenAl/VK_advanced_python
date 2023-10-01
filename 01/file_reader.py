@@ -11,17 +11,20 @@ class FileFilterReader:
 
     def find_line(self):
         if len(self.words_for_searching) == 0:
-            return []
-        res = []
+            return
         while True:
+            good_line = False
             line = self.file.readline()
             if not line:
-                break
+                return
             for word in line.split(" "):
                 if word.lower() in self.words_for_searching:
-                    res.append(line.strip())
+                    good_line = True
                     break
-        return res
+            if good_line:
+                yield line.strip()
+            else:
+                yield
 
     def __del__(self):
         if self.file is not None:
