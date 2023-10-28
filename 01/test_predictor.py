@@ -129,3 +129,46 @@ class TestPredictor(unittest.TestCase):
 
         self.assertEqual("invalid thresholds", str(err.exception))
         self.assertEqual(ThresholdError, type(err.exception))
+
+    def test_predict_edge_case_predict_equal_bad_th(self):
+        with mock.patch("model.Model.predict") as mock_fetch:
+            mock_fetch.return_value = 0.4
+
+            self.assertEqual("неуд",
+                             predict_message_mood("test", self.model, 0.4, 0.8))
+            expected_calls = [
+                mock.call("test"),
+            ]
+            self.assertEqual(expected_calls, mock_fetch.mock_calls)
+
+    def test_predict_edge_predict_equal_good_th(self):
+        with mock.patch("model.Model.predict") as mock_fetch:
+            mock_fetch.return_value = 0.8
+
+            self.assertEqual("отл",
+                             predict_message_mood("test", self.model, 0.4, 0.8))
+            expected_calls = [
+                mock.call("test"),
+            ]
+            self.assertEqual(expected_calls, mock_fetch.mock_calls)
+
+    def test_predict_edge_case_predict_equal_0(self):
+        with mock.patch("model.Model.predict") as mock_fetch:
+            mock_fetch.return_value = 0
+
+            self.assertEqual("неуд",
+                             predict_message_mood("test", self.model, 0.4, 0.8))
+            expected_calls = [
+                mock.call("test"),
+            ]
+            self.assertEqual(expected_calls, mock_fetch.mock_calls)
+    def test_predict_edge_predict_equal_1(self):
+        with mock.patch("model.Model.predict") as mock_fetch:
+            mock_fetch.return_value = 1
+
+            self.assertEqual("отл",
+                             predict_message_mood("test", self.model, 0.4, 0.8))
+            expected_calls = [
+                mock.call("test"),
+            ]
+            self.assertEqual(expected_calls, mock_fetch.mock_calls)

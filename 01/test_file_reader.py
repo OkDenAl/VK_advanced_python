@@ -24,10 +24,9 @@ class TestFileFilterReader(unittest.TestCase):
             f_reader = FileFilterReader("file.txt", ["роза", "ЛЮБЛЮ"]).find_line()
 
             res_list = []
-            for _ in range(3):
+            for _ in range(2):
                 res = next(f_reader)
-                if res is not None:
-                    res_list.append(res)
+                res_list.append(res)
             self.assertEqual(["а Роза упала на Лапу Азора", "люблю розы"], res_list)
             expected_calls = [
                 mock.call("file.txt"),
@@ -40,10 +39,9 @@ class TestFileFilterReader(unittest.TestCase):
             f_reader = FileFilterReader("file.txt", ["роза"]).find_line()
 
             res_list = []
-            for _ in range(3):
+            for _ in range(1):
                 res = next(f_reader)
-                if res is not None:
-                    res_list.append(res)
+                res_list.append(res)
 
             self.assertEqual(["а Роза упала на Лапу Азора"], res_list)
             expected_calls = [
@@ -54,19 +52,14 @@ class TestFileFilterReader(unittest.TestCase):
     def test_lines_not_found(self):
         with mock.patch("file_reader.open") as mock_fetch:
             mock_fetch.return_value = self.mock_file_data
-            f_reader = FileFilterReader("file.txt", ["розы"]).find_line()
-            res_list = []
-            for _ in range(3):
-                res = next(f_reader)
-                if res is not None:
-                    res_list.append(res)
-            self.assertEqual([], [])
-            expected_calls = [
-                mock.call("file.txt"),
-            ]
-            self.assertEqual(expected_calls, mock_fetch.mock_calls)
             with self.assertRaises(StopIteration) as err:
+                f_reader = FileFilterReader("file.txt", ["розы"]).find_line()
                 next(f_reader)
+
+                expected_calls = [
+                    mock.call("file.txt"),
+                ]
+                self.assertEqual(expected_calls, mock_fetch.mock_calls)
 
             self.assertEqual(StopIteration, type(err.exception))
 

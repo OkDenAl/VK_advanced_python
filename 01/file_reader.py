@@ -23,8 +23,6 @@ class FileFilterReader:
                     break
             if good_line:
                 yield line.strip()
-            else:
-                yield
 
     def __del__(self):
         if self.file is not None:
