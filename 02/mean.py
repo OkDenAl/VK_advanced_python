@@ -15,7 +15,7 @@ def mean(k):
     def mean_inner(func):
         def inner(*args, **kwargs):
             start_time = time.time()
-            func(*args, **kwargs)
+            return_value = func(*args, **kwargs)
             end_time = time.time()
             nonlocal counter
             nonlocal mean_val
@@ -36,6 +36,7 @@ def mean(k):
                 last_calls = counter % k
             print(f"Среднее время выполнения последних {last_calls}"
                   f" вызовов функции {func.__name__}: {mean_val}", buffer)
+            return return_value
 
         return inner
 
@@ -49,9 +50,10 @@ def foo(arg1):
 
 @mean(2)
 def boo(arg1):
-    pass
+    return arg1
 
 
 if __name__ == "__main__":
     for _ in range(100):
-        boo("Walter")
+        arg=boo("Walter")
+        print("arg:",arg)
