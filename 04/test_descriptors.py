@@ -54,10 +54,13 @@ class TestDescriptor(unittest.TestCase):
         with self.assertRaises(TypeError) as err:
             programmer.program_language = 100
         self.assertEqual("Язык программирования должен быть строкой", str(err.exception))
+        self.assertEqual(programmer.program_language, "Golang")
+
         with self.assertRaises(ValueError) as err:
             programmer.program_language = "lang"
         self.assertEqual("Язык программирования должен быть в ('C++',"
                          " 'Python', 'Golang', 'Rust', 'Java', 'Javascript')", str(err.exception))
+        self.assertEqual(programmer.program_language, "Golang")
 
     def test_change_salary_field(self):
         programmer = Programmer("Python", 2.0, 200000)
@@ -69,9 +72,12 @@ class TestDescriptor(unittest.TestCase):
         with self.assertRaises(TypeError) as err:
             programmer.salary = 111111.1
         self.assertEqual("Зарплата должна быть целым числом в рублях", str(err.exception))
+        self.assertEqual(programmer.salary, 300000)
+
         with self.assertRaises(ValueError) as err:
             programmer.salary = -300000
         self.assertEqual("Зарплата должна быть положительным числом", str(err.exception))
+        self.assertEqual(programmer.salary, 300000)
 
     def test_change_work_experience_field(self):
         programmer = Programmer("Python", 2.0, 200000)
@@ -83,6 +89,9 @@ class TestDescriptor(unittest.TestCase):
         with self.assertRaises(TypeError) as err:
             programmer.work_experience = 1
         self.assertEqual("Опыт работы должен быть числом с плавающей точкой в годах", str(err.exception))
+        self.assertEqual(programmer.work_experience, 2.5)
+
         with self.assertRaises(ValueError) as err:
             programmer.work_experience = -1.0
         self.assertEqual("Опыт работы должен быть положительным числом", str(err.exception))
+        self.assertEqual(programmer.work_experience, 2.5)

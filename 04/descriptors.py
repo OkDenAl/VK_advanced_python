@@ -2,7 +2,7 @@ class ProgrammingLanguageDescriptor:
     languages = ("C++", "Python", "Golang", "Rust", "Java", "Javascript")
 
     def __set_name__(self, owner, name):
-        self.name = f"prog_lang_descr_{name}"
+        self.name = f"__{name}"
 
     def __get__(self, obj, objtype):
         if obj is None:
@@ -22,7 +22,7 @@ class ProgrammingLanguageDescriptor:
 
 class WorkExperienceDescriptor:
     def __set_name__(self, owner, name):
-        self.name = f"work_exp_descr_{name}"
+        self.name = f"__{name}"
 
     def __get__(self, obj, objtype):
         if obj is None:
@@ -30,7 +30,6 @@ class WorkExperienceDescriptor:
         return getattr(obj, self.name)
 
     def __set__(self, obj, val):
-        print(obj,val)
         if obj is None:
             print("here")
             return None
@@ -44,7 +43,7 @@ class WorkExperienceDescriptor:
 
 class SalaryDescriptor:
     def __set_name__(self, owner, name):
-        self.name = f"salary_descr_{name}"
+        self.name = f"__{name}"
 
     def __get__(self, obj, objtype):
         if obj is None:
