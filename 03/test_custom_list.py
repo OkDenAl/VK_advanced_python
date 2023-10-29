@@ -50,9 +50,9 @@ class TestMySort(unittest.TestCase):
 
     def test_add_with_empty_right(self):
         list1 = CustomList([1, 2, 3])
-        list2=[]
+        list2 = []
         res = list2 + list1
-        self.assertTrue(are_lists_eq(res, CustomList([1,2,3])))
+        self.assertTrue(are_lists_eq(res, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list1, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list2, []))
         list2 = CustomList([])
@@ -63,9 +63,9 @@ class TestMySort(unittest.TestCase):
 
     def test_add_with_empty_left(self):
         list1 = CustomList([1, 2, 3])
-        list2=[]
+        list2 = []
         res = list1 + list2
-        self.assertTrue(are_lists_eq(res, CustomList([1,2,3])))
+        self.assertTrue(are_lists_eq(res, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list1, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list2, []))
         list2 = CustomList([])
@@ -118,7 +118,7 @@ class TestMySort(unittest.TestCase):
         list1 = CustomList([1, 2, 3])
         list2 = []
         res = list2 - list1
-        self.assertTrue(are_lists_eq(res, CustomList([-1,-2,-3])))
+        self.assertTrue(are_lists_eq(res, CustomList([-1, -2, -3])))
         self.assertTrue(are_lists_eq(list1, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list2, []))
         list2 = CustomList([])
@@ -131,7 +131,7 @@ class TestMySort(unittest.TestCase):
         list1 = CustomList([1, 2, 3])
         list2 = []
         res = list1 - list2
-        self.assertTrue(are_lists_eq(res, CustomList([1,2,3])))
+        self.assertTrue(are_lists_eq(res, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list1, CustomList([1, 2, 3])))
         self.assertTrue(are_lists_eq(list2, []))
         list2 = CustomList([])
@@ -210,8 +210,8 @@ class TestMySort(unittest.TestCase):
 
     def test_neg(self):
         list1 = CustomList([2, -1, 0])
-        res=-list1
-        self.assertTrue(are_lists_eq(res, CustomList([-2,1,0])))
+        res = -list1
+        self.assertTrue(are_lists_eq(res, CustomList([-2, 1, 0])))
         self.assertTrue(are_lists_eq(list1, CustomList([2, -1, 0])))
 
     def test___str__(self):
