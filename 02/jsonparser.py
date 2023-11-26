@@ -26,8 +26,10 @@ def parse_json(json_str, keyword_callback, required_fields=None,
 
     for required_field in required_fields:
         for json_key in json_decode:
-            if json_key.lower() == required_field.lower():
+            if json_key == required_field:
+                if not isinstance(json_decode[json_key], list):
+                    json_decode[json_key] = json_decode[json_key].split()
                 for keyword in keywords:
-                    for word in json_decode[json_key].split():
+                    for word in json_decode[json_key]:
                         if keyword.lower() == word.lower():
                             keyword_callback(required_field, keyword)

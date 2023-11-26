@@ -50,14 +50,36 @@ class TestJsonParser(unittest.TestCase):
                    required_fields, keywords)
         self.assertEqual(keyword_callback_mock.call_count, 0)
 
-    def test_ok_with_different_register(self):
+    def test_ok_with_required_fields_correct_register(self):
         keywords = ["WORD1"]
-        required_fields = ["KEY1"]
+        required_fields = ["key1"]
         keyword_callback_mock = mock.Mock()
         parse_json(self.dummy_json, keyword_callback_mock,
                    required_fields, keywords)
         expected_calls = [
-            mock.call("KEY1","WORD1"),
+            mock.call("key1","WORD1"),
+        ]
+        self.assertEqual(expected_calls, keyword_callback_mock.mock_calls)
+
+    def test_ok_with_required_fields_incorrect_register(self):
+        keywords = ["WORD1"]
+        required_fields = ["Key1"]
+        keyword_callback_mock = mock.Mock()
+        parse_json(self.dummy_json, keyword_callback_mock,
+                   required_fields, keywords)
+        expected_calls = [
+        ]
+        self.assertEqual(expected_calls, keyword_callback_mock.mock_calls)
+
+    def test_ok_with_repeated_required_fields_correct_register(self):
+        keywords = ["WORD1"]
+        required_fields = ["key1","key1"]
+        keyword_callback_mock = mock.Mock()
+        parse_json(self.dummy_json, keyword_callback_mock,
+                   required_fields, keywords)
+        expected_calls = [
+            mock.call("key1", "WORD1"),
+            mock.call("key1", "WORD1")
         ]
         self.assertEqual(expected_calls, keyword_callback_mock.mock_calls)
 
